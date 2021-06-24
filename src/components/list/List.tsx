@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { Message } from '../message/Message';
+import { Message, IMessageData } from '../message/Message';
 
 
 interface IList {
-	items: React.ReactNode[];
+	items: IMessageData[];
 }
 
 export const List: React.FC<IList> = ({ items }) => {
