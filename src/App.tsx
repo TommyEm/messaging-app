@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { 
+	useCallback, 
+	useEffect, 
+	useState 
+} from 'react';
 import axios, { AxiosError } from 'axios';
 
 import { Button } from './components/button/Button';
@@ -13,6 +17,7 @@ function App() {
 	const [error, setError] = useState<AxiosError | null>(null);
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [messages, setMessages] = useState<IMessageData[]>([] as IMessageData[]);
+	const [newMessage, setNewMessage] = useState<string>('');
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -21,7 +26,7 @@ function App() {
 				const ax = axios.create({
 					baseURL: 'http://localhost:3000/data'
 				});
-				const response = await ax.get('fake-data.json');
+				const response = await ax.get<IMessageData[]>('fake-data.json');
 				setIsLoaded(true);
 				setMessages(response.data);
 
@@ -29,10 +34,25 @@ function App() {
 				setIsLoaded(true);
 				setError(err);
 			}
-		}
+		};
 
 		fetchData();
 	}, []);
+
+	const handleChangeMessage = (e: React.FormEvent<HTMLInputElement>) => {
+		setNewMessage(e.currentTarget.value);	
+	}
+
+	const onAddMessage = useCallback(() => {
+		setMessages([
+			...messages,
+			{
+				text: newMessage,
+				private: false,
+			},
+		]);
+		
+	}, [newMessage]);
 
 	if (error) {
 		return <div>Error</div>;
@@ -47,8 +67,8 @@ function App() {
 
 				<List items={messages} />
 
-				<Textarea />
-				<Button>Send</Button>
+				<Textarea value={newMessage} onChange={handleChangeMessage} />
+				<Button onClick={onAddMessage}>Send</Button>
 			</div>
 		);
 	}

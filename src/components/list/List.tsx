@@ -12,15 +12,15 @@ export const List: React.FC<IList> = ({ items }) => {
 		return (
 			<li key={i} className='ListItem'>
 				<Message>
-					item.text
+					{item.text}
 				</Message>
 			</li>
 		)
-	})
+	});
 
 	return (
 		<div className='List'>
 			{listItems}
 		</div>
-	)
+	);
 };
