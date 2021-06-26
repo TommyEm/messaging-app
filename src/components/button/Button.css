@@ -1,0 +1,7 @@
+.Button {
+	all: unset;
+	padding: var(--space2);
+	color: var(--color-primary400);
+	font-weight: bold;
+	cursor: pointer;
+}

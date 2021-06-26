@@ -66,7 +66,7 @@ function App() {
 		return (
 			<div className='App'>
 				<header className='App-header'>
-					<h1>Message App</h1>
+					<h1>Messaging App</h1>
 				</header>
 
 				<main className='App-main'>
