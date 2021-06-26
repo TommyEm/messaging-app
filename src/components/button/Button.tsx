@@ -2,12 +2,21 @@ import * as React from 'react';
 
 
 interface IButton {
+	type?: 'button' | 'submit' | 'reset';
 	onClick: () => void;
 }
 
-export const Button: React.FC<IButton> = ({ children, onClick }) => {
+export const Button: React.FC<IButton> = ({
+	children,
+	type = 'button',
+	onClick
+}) => {
 	return (
-		<button className='Button' onClick={onClick}>
+		<button
+			className='Button'
+			type={type}
+			onClick={onClick}
+		>
 			{children}
 		</button>
 	);

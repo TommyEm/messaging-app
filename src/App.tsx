@@ -44,15 +44,17 @@ function App() {
 	}
 
 	const onAddMessage = useCallback(() => {
-		setMessages([
-			...messages,
-			{
-				text: newMessage,
-				private: false,
-			},
-		]);
-		
-	}, [newMessage]);
+		if (newMessage !== '') {
+			setMessages([
+				...messages,
+				{
+					text: newMessage,
+					private: false,
+				},
+			]);
+			setNewMessage('');
+		}
+	}, [newMessage, messages]);
 
 	if (error) {
 		return <div>Error</div>;
@@ -62,13 +64,19 @@ function App() {
 
 	} else {
 		return (
-			<div className="App">
-				<h1>Message App</h1>
+			<div className='App'>
+				<header className='App-header'>
+					<h1>Message App</h1>
+				</header>
 
-				<List items={messages} />
+				<main className='App-main'>
+					<List items={messages} />
+				</main>
 
-				<Textarea value={newMessage} onChange={handleChangeMessage} />
-				<Button onClick={onAddMessage}>Send</Button>
+				<footer className='App-footer'>
+					<Textarea value={newMessage} onChange={handleChangeMessage} />
+					<Button type='submit' onClick={onAddMessage}>Send</Button>
+				</footer>
 			</div>
 		);
 	}

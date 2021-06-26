@@ -1,0 +1,7 @@
+.Message {
+	padding: var(--space-3);
+	background-color: var(--color-primary400);
+	border-radius: var(--radius-1) var(--radius-1) var(--radius-1) 0;
+	color: var(--color-neutral0);
+	text-align: left;
+}

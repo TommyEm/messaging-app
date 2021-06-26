@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Textarea.css';
 
 
 interface ITextarea {
@@ -11,7 +12,8 @@ export const Textarea: React.FC<ITextarea> = ({ value, onChange }) => {
 		<input
 			className='Textarea'
 			type='textarea'
-			defaultValue={value}
+			value={value}
+			placeholder='Type a message'
 			onChange={onChange}
 		/>
 	);

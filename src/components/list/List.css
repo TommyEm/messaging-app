@@ -1,0 +1,7 @@
+.List {
+	list-style: none;
+}
+
+.List > li + li {
+	margin-top: var(--space-3);
+}

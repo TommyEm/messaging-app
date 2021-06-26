@@ -1,6 +1,6 @@
 import * as React from 'react';
-
 import { Message, IMessageData } from '../message/Message';
+import './List.css';
 
 
 interface IList {

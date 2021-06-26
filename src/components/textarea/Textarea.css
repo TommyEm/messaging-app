@@ -1,0 +1,12 @@
+.Textarea {
+	padding: var(--space-2);
+	background-color: var(--color-neutral100);
+	border: none;
+	border-radius: 100px;
+	color: var(--color-neutral400);
+	font-size: var(--font-size1);
+}
+
+.Textarea::placeholder {
+	color: var(--color-neutral300);
+}

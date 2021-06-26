@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Message.css';
 
 
 export interface IMessageData {
