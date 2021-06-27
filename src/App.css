@@ -9,7 +9,7 @@
 
 .App-header,
 .App-footer {
-	padding: var(--space-3) var(--space-2);
+	padding: var(--space3) var(--space2);
 }
 
 .App-header h1 {
@@ -22,13 +22,13 @@
 	flex-direction: column;
 	justify-content: flex-end;
 	overflow: scroll;
-	padding: 0 var(--space-2);
+	padding: 0 var(--space2);
 }
 
 .App-footer {
 	display: grid;
 	grid-template-columns: auto 120px 60px;
 	align-items: center;
-	gap: var(--space-2);
+	gap: var(--space2);
 	background-color: var(--color-neutral0);
 }

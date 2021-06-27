@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { 
+import {
 	useCallback, 
 	useEffect,
 	useState 
@@ -46,11 +46,18 @@ function App() {
 		setNewMessage(e.currentTarget.value);
 	};
 
+	const handleSubmitFromTextarea = (e: any) => {
+		// Submit if the Return key is pressed
+		if (e.keyCode === 13) {
+			handleAddMessage();
+		}
+	};
+
 	const togglePrivateMessage = () => {
 		setNewMessagePrivate(!newMessagePrivate);
 	};
 
-	const onAddMessage = useCallback(() => {
+	const handleAddMessage = useCallback(() => {
 		if (newMessage !== '') {
 			setMessages([
 				...messages,
@@ -82,12 +89,16 @@ function App() {
 				</main>
 
 				<footer className='App-footer'>
-					<Textarea value={newMessage} onChange={handleChangeMessage} />
+					<Textarea
+						value={newMessage}
+						onChange={handleChangeMessage}
+						onKeyDown={handleSubmitFromTextarea}
+					/>
 					<Label>
 						Private:
 						<Checkbox checked={newMessagePrivate} onChange={togglePrivateMessage} />
 					</Label>
-					<Button type='submit' onClick={onAddMessage}>Send</Button>
+					<Button type='submit' onClick={handleAddMessage}>Send</Button>
 				</footer>
 			</div>
 		);

@@ -8,15 +8,15 @@
 	--color-neutral400: #3E4250;
 	--color-neutral500: #262C3C;
 
-	--space-1: 8px;
-	--space-2: 16px;
-	--space-3: 24px;
-	--space-4: 32px;
+	--space1: 8px;
+	--space2: 16px;
+	--space3: 24px;
+	--space4: 32px;
 
 	--font-size1: 16px;
 
-	--radius-1: 8px;
-	--radius-2: 100px;
+	--radius1: 8px;
+	--radius2: 100px;
 }
 
 body {

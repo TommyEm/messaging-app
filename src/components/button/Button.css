@@ -1,7 +1,11 @@
 .Button {
 	all: unset;
-	padding: var(--space2);
+	padding: var(--space3) var(--space1);
 	color: var(--color-primary400);
 	font-weight: bold;
 	cursor: pointer;
+}
+
+.Button:focus {
+	outline: 1px solid var(--color-primary400);
 }

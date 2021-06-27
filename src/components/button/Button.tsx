@@ -16,6 +16,7 @@ export const Button: React.FC<IButton> = ({
 		<button
 			className='Button'
 			type={type}
+			tabIndex={0}
 			onClick={onClick}
 		>
 			{children}
