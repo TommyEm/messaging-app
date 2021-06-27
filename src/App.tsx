@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { 
 	useCallback, 
-	useEffect, 
+	useEffect,
 	useState 
 } from 'react';
 import axios, { AxiosError } from 'axios';
@@ -9,7 +9,9 @@ import axios, { AxiosError } from 'axios';
 import { Button } from './components/button/Button';
 import { List } from './components/list/List';
 import { IMessageData } from './components/message/Message';
+import { Label } from './components/label/Label';
 import { Textarea } from './components/textarea/Textarea';
+import { Checkbox } from './components/checkbox/Checkbox';
 import './App.css';
 
 
@@ -18,6 +20,7 @@ function App() {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [messages, setMessages] = useState<IMessageData[]>([] as IMessageData[]);
 	const [newMessage, setNewMessage] = useState<string>('');
+	const [newMessagePrivate, setNewMessagePrivate] = useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -40,8 +43,12 @@ function App() {
 	}, []);
 
 	const handleChangeMessage = (e: React.FormEvent<HTMLInputElement>) => {
-		setNewMessage(e.currentTarget.value);	
-	}
+		setNewMessage(e.currentTarget.value);
+	};
+
+	const togglePrivateMessage = () => {
+		setNewMessagePrivate(!newMessagePrivate);
+	};
 
 	const onAddMessage = useCallback(() => {
 		if (newMessage !== '') {
@@ -49,12 +56,13 @@ function App() {
 				...messages,
 				{
 					text: newMessage,
-					private: false,
+					private: newMessagePrivate,
 				},
 			]);
 			setNewMessage('');
+			setNewMessagePrivate(false);
 		}
-	}, [newMessage, messages]);
+	}, [newMessage, messages, newMessagePrivate]);
 
 	if (error) {
 		return <div>Error</div>;
@@ -75,6 +83,10 @@ function App() {
 
 				<footer className='App-footer'>
 					<Textarea value={newMessage} onChange={handleChangeMessage} />
+					<Label>
+						Private:
+						<Checkbox checked={newMessagePrivate} onChange={togglePrivateMessage} />
+					</Label>
 					<Button type='submit' onClick={onAddMessage}>Send</Button>
 				</footer>
 			</div>

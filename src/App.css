@@ -8,9 +8,12 @@
 }
 
 .App-header,
-.App-main,
 .App-footer {
 	padding: var(--space-3) var(--space-2);
+}
+
+.App-header h1 {
+	margin: 0;
 }
 
 .App-main {
@@ -18,11 +21,14 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+	overflow: scroll;
+	padding: 0 var(--space-2);
 }
 
 .App-footer {
 	display: grid;
-	grid-template-columns: auto 60px;
+	grid-template-columns: auto 120px 60px;
+	align-items: center;
 	gap: var(--space-2);
 	background-color: var(--color-neutral0);
 }

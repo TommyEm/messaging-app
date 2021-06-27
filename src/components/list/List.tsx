@@ -11,7 +11,7 @@ export const List: React.FC<IList> = ({ items }) => {
 	const listItems = items.map((item: any, i: number) => {
 		return (
 			<li key={i} className='ListItem'>
-				<Message>
+				<Message privateMessage={item.private}>
 					{item.text}
 				</Message>
 			</li>
@@ -19,8 +19,8 @@ export const List: React.FC<IList> = ({ items }) => {
 	});
 
 	return (
-		<div className='List'>
+		<ul className='List'>
 			{listItems}
-		</div>
+		</ul>
 	);
 };
