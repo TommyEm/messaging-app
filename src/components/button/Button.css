@@ -6,6 +6,9 @@
 	cursor: pointer;
 }
 
-.Button:focus {
+.Button:focus:not(:focus-visible) {
+	outline: none;
+}
+.Button:focus-visible {
 	outline: 1px solid var(--color-primary400);
 }

@@ -1,15 +1,17 @@
 import * as React from 'react';
 import {
-	useCallback, 
+	useCallback,
 	useEffect,
+	useLayoutEffect,
 	useRef,
-	useState 
+	useState,
 } from 'react';
 import axios, { AxiosError } from 'axios';
+import { uniqueId } from 'lodash';
 
 import { Button } from './components/button/Button';
 import { List } from './components/list/List';
-import { IMessageData } from './components/message/Message';
+import { IApiMessage, IMessageData } from './components/message/Message';
 import { Label } from './components/label/Label';
 import { Input } from './components/input/Input';
 import { Checkbox } from './components/checkbox/Checkbox';
@@ -23,19 +25,29 @@ function App() {
 	const [newMessage, setNewMessage] = useState<string>('');
 	const [newMessagePrivate, setNewMessagePrivate] = useState<boolean>(false);
 
-	const listRef = useRef<HTMLUListElement>(null);
+	// These refs are used to auto-scroll the list of messages into view
 	const mainRef = useRef<HTMLDivElement>(null);
+	const listRef = useRef<HTMLUListElement>(null);
+
+	// This one is needed to focus the input field
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				// Without a real API, we fetch data from a local file
+				// Without a real API, data are fetched from a local file
 				const ax = axios.create({
-					baseURL: 'http://localhost:3000/data'
+					baseURL: 'http://localhost:3000/data',
 				});
-				const response = await ax.get<IMessageData[]>('fake-data.json');
+				const response = await ax.get<IApiMessage[]>('fake-data.json');
 				setIsLoaded(true);
-				setMessages(response.data);
+
+				// Without IDs from the API, we generate and add unique IDs to be used as keys when listed
+				const messageData = response.data.map((item: IApiMessage) => {
+					const id = uniqueId('message-');
+					return { ...item, id };
+				});
+				setMessages(messageData);
 
 			} catch (err) {
 				setIsLoaded(true);
@@ -49,14 +61,16 @@ function App() {
 	// Scroll into view each time a new message is displayed
 	useEffect(() => {
 		if (mainRef.current && listRef.current) {
-			const newOffset = listRef.current.offsetHeight;
-
 			mainRef.current.scrollTo({
-				top: newOffset,
+				top: listRef.current.offsetHeight,
 				behavior: 'smooth',
 			});
 		}
 	}, [messages]);
+
+	useLayoutEffect(() => {
+		inputRef.current?.focus();
+	});
 
 	const handleChangeMessage = (e: React.FormEvent<HTMLInputElement>) => {
 		setNewMessage(e.currentTarget.value);
@@ -78,6 +92,7 @@ function App() {
 			setMessages([
 				...messages,
 				{
+					id: uniqueId('message-'),
 					text: newMessage,
 					private: newMessagePrivate,
 				},
@@ -90,10 +105,10 @@ function App() {
 	}, [newMessage, messages, newMessagePrivate]);
 
 	if (error) {
-		return <div>Error</div>;
+		return <p>Something went wrong...</p>;
 
 	} else if (!isLoaded) {
-		return <div>Loading...</div>;
+		return <p>Loading...</p>;
 
 	} else {
 		return (
@@ -108,6 +123,7 @@ function App() {
 
 				<footer className='App-footer'>
 					<Input
+						ref={inputRef}
 						value={newMessage}
 						onChange={handleChangeMessage}
 						onKeyDown={handleSubmitFromInput}

@@ -1,3 +1,10 @@
 .Checkbox {
-	
+
+}
+
+.Checkbox:focus:not(:focus-visible) {
+	outline: none;
+}
+.Checkbox:focus-visible {
+	outline: 1px solid var(--color-primary400);
 }

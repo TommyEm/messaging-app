@@ -8,21 +8,18 @@ interface IList {
 }
 
 export const List = React.forwardRef<HTMLUListElement, IList>(({ items }, ref) => {
-	const listItems = items.map((item: any, i: number) => {
+	const listItems = items.map((item: IMessageData) => {
 		return (
-			<li key={i} className='ListItem'>
+			<li key={item.id} className='ListItem'>
 				<Message privateMessage={item.private}>
 					{item.text}
 				</Message>
 			</li>
-		)
+		);
 	});
 
 	return (
-		<ul
-			ref={ref}
-			className='List'
-		>
+		<ul ref={ref} className='List'>
 			{listItems}
 		</ul>
 	);

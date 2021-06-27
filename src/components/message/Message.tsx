@@ -3,9 +3,13 @@ import classNames from 'classnames';
 import './Message.css';
 
 
-export interface IMessageData {
+export interface IApiMessage {
 	text: string;
 	private: boolean;
+}
+
+export interface IMessageData extends IApiMessage {
+	id: string;
 }
 
 interface IMessage {

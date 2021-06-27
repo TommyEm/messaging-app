@@ -8,9 +8,10 @@ interface IInput {
 	onKeyDown?: (e: any) => void;
 }
 
-export const Input: React.FC<IInput> = ({ value, onChange, onKeyDown }) => {
+export const Input = React.forwardRef<HTMLInputElement, IInput>(({ value, onChange, onKeyDown }, ref) => {
 	return (
 		<input
+			ref={ref}
 			className='Input'
 			type='text'
 			value={value}
@@ -19,4 +20,4 @@ export const Input: React.FC<IInput> = ({ value, onChange, onKeyDown }) => {
 			onKeyDown={onKeyDown}
 		/>
 	);
-};
+});
