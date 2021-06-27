@@ -7,5 +7,15 @@
 }
 
 .Message.mod-private {
-	background-color: blueviolet;
+	position: relative;
+	background-color: var(--color-neutral400);
+}
+
+.Message.mod-private::after {
+	content: "Private";
+	position: absolute;
+	top: var(--space1);
+	right: var(--space1);
+	color: var(--color-neutral300);
+	font-size: var(--font-size1);
 }

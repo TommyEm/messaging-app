@@ -7,7 +7,7 @@ interface IList {
 	items: IMessageData[];
 }
 
-export const List: React.FC<IList> = ({ items }) => {
+export const List = React.forwardRef<HTMLUListElement, IList>(({ items }, ref) => {
 	const listItems = items.map((item: any, i: number) => {
 		return (
 			<li key={i} className='ListItem'>
@@ -19,8 +19,11 @@ export const List: React.FC<IList> = ({ items }) => {
 	});
 
 	return (
-		<ul className='List'>
+		<ul
+			ref={ref}
+			className='List'
+		>
 			{listItems}
 		</ul>
 	);
-};
+});

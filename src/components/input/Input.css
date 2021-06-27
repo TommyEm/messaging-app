@@ -1,12 +1,12 @@
-.Textarea {
+.Input {
 	padding: var(--space2);
 	background-color: var(--color-neutral100);
 	border: none;
 	border-radius: 100px;
 	color: var(--color-neutral400);
-	font-size: var(--font-size1);
+	font-size: var(--font-size2);
 }
 
-.Textarea::placeholder {
+.Input::placeholder {
 	color: var(--color-neutral300);
 }

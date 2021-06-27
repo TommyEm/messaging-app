@@ -18,9 +18,6 @@
 
 .App-main {
 	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
 	overflow: scroll;
 	padding: 0 var(--space2);
 }

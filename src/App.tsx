@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
 	useCallback, 
 	useEffect,
+	useRef,
 	useState 
 } from 'react';
 import axios, { AxiosError } from 'axios';
@@ -10,7 +11,7 @@ import { Button } from './components/button/Button';
 import { List } from './components/list/List';
 import { IMessageData } from './components/message/Message';
 import { Label } from './components/label/Label';
-import { Textarea } from './components/textarea/Textarea';
+import { Input } from './components/input/Input';
 import { Checkbox } from './components/checkbox/Checkbox';
 import './App.css';
 
@@ -21,6 +22,9 @@ function App() {
 	const [messages, setMessages] = useState<IMessageData[]>([] as IMessageData[]);
 	const [newMessage, setNewMessage] = useState<string>('');
 	const [newMessagePrivate, setNewMessagePrivate] = useState<boolean>(false);
+
+	const listRef = useRef<HTMLUListElement>(null);
+	const mainRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -42,11 +46,23 @@ function App() {
 		fetchData();
 	}, []);
 
+	// Scroll into view each time a new message is displayed
+	useEffect(() => {
+		if (mainRef.current && listRef.current) {
+			const newOffset = listRef.current.offsetHeight;
+
+			mainRef.current.scrollTo({
+				top: newOffset,
+				behavior: 'smooth',
+			});
+		}
+	}, [messages]);
+
 	const handleChangeMessage = (e: React.FormEvent<HTMLInputElement>) => {
 		setNewMessage(e.currentTarget.value);
 	};
 
-	const handleSubmitFromTextarea = (e: any) => {
+	const handleSubmitFromInput = (e: any) => {
 		// Submit if the Return key is pressed
 		if (e.keyCode === 13) {
 			handleAddMessage();
@@ -66,6 +82,8 @@ function App() {
 					private: newMessagePrivate,
 				},
 			]);
+
+			// Reset the fields
 			setNewMessage('');
 			setNewMessagePrivate(false);
 		}
@@ -84,15 +102,15 @@ function App() {
 					<h1>Messaging App</h1>
 				</header>
 
-				<main className='App-main'>
-					<List items={messages} />
+				<main ref={mainRef} className='App-main'>
+					<List ref={listRef} items={messages} />
 				</main>
 
 				<footer className='App-footer'>
-					<Textarea
+					<Input
 						value={newMessage}
 						onChange={handleChangeMessage}
-						onKeyDown={handleSubmitFromTextarea}
+						onKeyDown={handleSubmitFromInput}
 					/>
 					<Label>
 						Private:

@@ -1,18 +1,18 @@
 import * as React from 'react';
-import './Textarea.css';
+import './Input.css';
 
 
-interface ITextarea {
+interface IInput {
 	value: string;
 	onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 	onKeyDown?: (e: any) => void;
 }
 
-export const Textarea: React.FC<ITextarea> = ({ value, onChange, onKeyDown }) => {
+export const Input: React.FC<IInput> = ({ value, onChange, onKeyDown }) => {
 	return (
 		<input
-			className='Textarea'
-			type='textarea'
+			className='Input'
+			type='text'
 			value={value}
 			placeholder='Type a message'
 			onChange={onChange}
