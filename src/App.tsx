@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
 	useCallback,
 	useEffect,
-	useLayoutEffect,
 	useRef,
 	useState,
 } from 'react';
@@ -66,11 +65,10 @@ function App() {
 				behavior: 'smooth',
 			});
 		}
-	}, [messages]);
 
-	useLayoutEffect(() => {
+		// Since there's only 1 available action, let's auto-focus the input field each time the message list is rendered
 		inputRef.current?.focus();
-	});
+	}, [messages]);
 
 	const handleChangeMessage = (e: React.FormEvent<HTMLInputElement>) => {
 		setNewMessage(e.currentTarget.value);

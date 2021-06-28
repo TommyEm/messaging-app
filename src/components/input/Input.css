@@ -11,9 +11,6 @@
 	color: var(--color-neutral300);
 }
 
-.Input:focus:not(:focus-visible) {
-	outline: none;
-}
-.Input:focus-visible {
+.Input:focus {
 	outline: 1px solid var(--color-primary400);
 }
