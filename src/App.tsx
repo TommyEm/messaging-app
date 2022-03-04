@@ -50,7 +50,7 @@ function App() {
 
 			} catch (err) {
 				setIsLoaded(true);
-				setError(err);
+				setError(err as AxiosError);
 			}
 		};
 
