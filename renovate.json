@@ -9,6 +9,14 @@
         "patch"
       ],
       "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["jest", "testing"],
+      "groupName": "tests"
+    },
+    {
+      "matchPackagePatterns": ["react"],
+      "groupName": "react"
     }
   ],
   "timezone": "Europe/Paris",
