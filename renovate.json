@@ -2,11 +2,26 @@
   "extends": [
     "config:base"
   ],
+  "rebaseWhen": "behind-base-branch",
+  "prHourlyLimit": 4,
+  "separateMinorPatch": true,
+  "patch": {
+    "automerge": true
+  },
+  "pin": {
+    "automerge": true
+  },
+  "lockFileMaintenance": {
+    "automerge": true
+  },
   "packageRules": [
     {
       "updateTypes": [
         "minor",
         "patch"
+      ],
+      "matchPackagePrefixes": [
+        "@types/"
       ],
       "automerge": true
     },
@@ -15,8 +30,8 @@
       "groupName": "tests"
     },
     {
-      "matchPackagePatterns": ["react"],
-      "groupName": "react"
+      "matchPackagePatterns": ["storybook"],
+      "groupName": "storybook"
     }
   ],
   "timezone": "Europe/Paris",
